@@ -1,12 +1,15 @@
 import Image from "next/image";
+import { useRouter } from 'next/router';
 import styles from './banner.module.css';
 
 const Banner = (props) => {
 
-    const {title, subTitle, imgUrl} = props;
+    const {title, subTitle, imgUrl, videoId} = props;
+    const router = useRouter();
 
     const handleOnPlay = () => {
-        console.log('handleOnPlay')
+        console.log('handleOnPlay');
+        router.push(`video/${videoId}`);
     }
 
     return (
@@ -21,7 +24,12 @@ const Banner = (props) => {
                     <h3 className={styles.subTitle}>{subTitle}</h3>
                     <div className={styles.playBtnWrapper}>
                         <button className={styles.btnWithIcon} onClick={handleOnPlay}>
-                            <Image src="/static/play_arrow.svg" alt="Play Icon" width="32px" height="32px"/>
+                            <Image 
+                                src="/static/play_arrow.svg"
+                                alt="Play Icon"
+                                width="32px"
+                                height="32px"
+                            />
                             <span className={styles.playText}>Play</span>
                         </button>
                     </div>

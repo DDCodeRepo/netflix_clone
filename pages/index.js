@@ -11,16 +11,17 @@ import SectionCards from '../components/card/section-cards';
 import { getPopularVideos, getVideos } from '../lib/video';
 
 export async function getServerSideProps(){
+  
   const disneyVideos = await getVideos("disney trailer");
   const productivityVideos = await getVideos("productivity trailer");
   const travelVideos = await getVideos("travel trailer");
   const popularVideos = await getPopularVideos();
 
-
   return { props: { disneyVideos, travelVideos, productivityVideos, popularVideos } };
 }
 
 export default function Home({ disneyVideos, travelVideos, productivityVideos, popularVideos }) {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -29,8 +30,9 @@ export default function Home({ disneyVideos, travelVideos, productivityVideos, p
       </Head>
       
       <div className={styles.main}>
-        <NavBar username="debjit@dd.com"/>
-        <Banner 
+        <NavBar/>
+        <Banner
+          videoId="4zH5iYM4wJo"
           title='Clifford the red dog'
           subTitle='A very cute dog' 
           imgUrl='/static/clifford.webp'

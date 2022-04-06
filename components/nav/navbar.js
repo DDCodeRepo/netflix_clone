@@ -1,15 +1,31 @@
 import styles from './navbar.module.css';
 import { useRouter } from 'next/router';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from 'next/Link';
 import Image from 'next/image';
 
-const NavBar = (props) => {
-    const {username} = props;
+import { magic } from '../../lib/magic-client';
+
+const NavBar = () => {
 
     const [showDropdown, setShowDropdown] = useState(false);
+    const [username, setUsername] = useState('');
 
     const router = useRouter();
+
+    useEffect(() => {
+        return async () => {
+            try {
+                const { email } = await magic.user.getMetadata();
+
+                if(email){
+                    setUsername(email);
+                }
+            } catch (error) {
+                console.error('Error retirving email', error);
+            }
+        }
+    }, []);
 
     const handleOnClickHome = (e) => {
         e.preventDefault();
@@ -25,6 +41,21 @@ const NavBar = (props) => {
         e.preventDefault();
         setShowDropdown(!showDropdown);
     }
+
+    const handleSignOut = async (e) => {
+        e.preventDefault();
+        console.log("@@$$$$@@@$$$")
+
+        try {
+            await magic.user.logout();
+            console.log(await magic.user.isLoggedIn());
+            router.push('/login');
+          } catch (error) {
+            console.error('Error retirving email', error);
+            //router.push('/login');
+          }
+    }
+
 
     return (
         <div className={styles.container}>
@@ -57,12 +88,10 @@ const NavBar = (props) => {
                         {showDropdown && (
                             <div className={styles.navDropdown}>
                                 <div>
-                                    <Link href="/login">
-                                        <a className={styles.linkName} onClick='/login'>
-                                            Sign Out
-                                        </a>
-                                    </Link>
-                                    <div className={styles.lineWrapper}></div>
+                                    <a className={styles.linkName} onClick={handleSignOut}>
+                                        Sign Out
+                                    </a>
+                                    <div className={styles.lineWrapper} />
                                 </div>
                             </div>
                         )}
@@ -71,6 +100,6 @@ const NavBar = (props) => {
             </div>
         </div>
     );
-}
+};
 
 export default NavBar;
