@@ -9,6 +9,7 @@ import Card from '../components/card/card';
 import SectionCards from '../components/card/section-cards';
 
 import { getPopularVideos, getVideos } from '../lib/video';
+import { queryHasuraGQL } from '../lib/db/hasura';
 
 export async function getServerSideProps(){
   
@@ -21,7 +22,6 @@ export async function getServerSideProps(){
 }
 
 export default function Home({ disneyVideos, travelVideos, productivityVideos, popularVideos }) {
-
   return (
     <div className={styles.container}>
       <Head>
