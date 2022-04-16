@@ -7,7 +7,7 @@ import styles from '../styles/Video.module.css'
 import NavBar from "../components/nav/navbar";
 import clsx from "classnames";
 
-import { getYoutubeVideoById } from "../../lib/videos";
+import { getYoutubeVideoById } from "../lib/video";
 
 import Like from "../components/icons/like-icon";
 import DisLike from "../components/icons/dislike-icon";
