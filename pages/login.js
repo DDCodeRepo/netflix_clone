@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 
 import { useRouter } from "next/router";
 import Modal from "react-modal";
-import styles from "../../styles/Video.module.css";
+import styles from '../styles/Video.module.css'
 
 import NavBar from "../../components/nav/navbar";
 import clsx from "classnames";
 
 import { getYoutubeVideoById } from "../../lib/videos";
 
-import Like from "../../components/icons/like-icon";
-import DisLike from "../../components/icons/dislike-icon";
+import Like from "../components/icons/like-icon";
+import DisLike from "../components/icons/dislike-icon";
 
 Modal.setAppElement("#__next");
 
