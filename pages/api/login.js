@@ -26,6 +26,7 @@ export default async function login(req, res){
               },
               process.env.NEXT_PUBLIC_JWT_SECRET,
               );
+              
             console.log({ token });
 
             const isNewUserQuery = await isNewUser(token, metadata.issuer);

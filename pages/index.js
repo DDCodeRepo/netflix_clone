@@ -8,11 +8,16 @@ import Card from '../components/card/card';
 
 import SectionCards from '../components/card/section-cards';
 
-import { getPopularVideos, getVideos } from '../lib/video';
+import { getPopularVideos, getVideos, getWatchItAgainVideos } from '../lib/video';
 import { queryHasuraGQL } from '../lib/db/hasura';
 
 export async function getServerSideProps(){
+
+  const userId = "";
+  const token = "";
+  const watchItAgainVideos = await getWatchItAgainVideos(userId, token);
   
+  console.log({ watchItAgainVideos });
   const disneyVideos = await getVideos("disney trailer");
   const productivityVideos = await getVideos("productivity trailer");
   const travelVideos = await getVideos("travel trailer");
